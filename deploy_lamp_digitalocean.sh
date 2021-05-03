@@ -30,6 +30,8 @@ if [ ! -z "$character" ]; then
       
       if [[ $character == 1 ]]; then
       ################################# Install LAMP ############################################
+      echo "Please Set MYSQL Password"
+      read db_pass
       echo +++++++++++++++++++++++++++++++++++++++++++++
       echo +++++++++++++++++++++++++++++++++++++++++++++
       echo +++++++++++++ Installing LAMP +++++++++++++++
@@ -50,6 +52,9 @@ if [ ! -z "$character" ]; then
          sudo apt-get install php-pear php8.0-curl php8.0-dev php8.0-gd php8.0-mbstring php8.0-zip php8.0-mysql php8.0-xml php8.0-bcmath -y
          ################## install composer ##############
          sudo apt install composer -y
+         ################## set mysql db password ##############
+         mysql -u root -D mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '$db_pass';"
+         mysql -u root -p$db_pass -e "flush privileges;"
 
       elif [[ $character == 2 ]]; then
          ################################# Install SSL ############################################

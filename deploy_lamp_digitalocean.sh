@@ -1,9 +1,9 @@
 #!/bin/bash
 clear
 echo +++++++++++++++++++++++++++++++++++++++++++++
-echo + Choose PHP Version +
+echo + Choose Option +
 echo +++++++++++++++++++++++++++++++++++++++++++++
-echo "1- Insall LAMP Stack ( PHP 8.0 )"
+echo "1- Insall LAMP Stack ( PHP 8.0 ) +  NPM"
 echo "2- Install SSL"
 echo "3- Add Laravel to apache config"
 echo "4- Create laravel Privileges"
@@ -52,6 +52,10 @@ if [ ! -z "$character" ]; then
          sudo apt-get install php-pear php8.0-curl php8.0-dev php8.0-gd php8.0-mbstring php8.0-zip php8.0-mysql php8.0-xml php8.0-bcmath -y
          ################## install composer ##############
          sudo apt install composer -y
+         ################## install nodejs ##############
+         sudo apt install nodejs -y
+         ################## install npm ##############
+         sudo apt install npm -y
          ################## set mysql db password ##############
          mysql -u root -D mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '$db_pass';"
          mysql -u root -p$db_pass -e "flush privileges;"

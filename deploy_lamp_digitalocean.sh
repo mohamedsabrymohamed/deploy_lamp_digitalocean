@@ -4,21 +4,23 @@ echo +++++++++++++++++++++++++++++++++++++++++++++
 echo + Choose Option +
 echo +++++++++++++++++++++++++++++++++++++++++++++
 echo "1- Insall LAMP Stack ( PHP 8.0 ) +  NPM"
-echo "2- Install SSL"
-echo "3- Add Laravel to apache config"
-echo "4- Create laravel Privileges"
-echo "5- Create ssh keys for github"
-echo "6- Exit"
+echo "2- Insall Vue.js Server"
+echo "3- Install SSL"
+echo "4- Add Laravel to apache config"
+echo "5- Create laravel Privileges"
+echo "6- Create ssh keys for github"
+echo "7- Exit"
 
 ############################# read php version choice ##############################
 read character
 case $character in
 1) echo "Selected Insall LAMP Stack ( PHP 8.0 ) " ;;
-2) echo "Selected Install SSL" ;;
-3) echo "Add Laravel to apache config" ;;
-4) echo "Create laravel Privileges" ;;
-4) echo "Create ssh keys for github" ;;
-6) echo "exit" ;;
+2) echo "Insall Vue.js Server " ;;
+3) echo "Selected Install SSL" ;;
+4) echo "Add Laravel to apache config" ;;
+5) echo "Create laravel Privileges" ;;
+6) echo "Create ssh keys for github" ;;
+7) echo "exit" ;;
 
 esac
 
@@ -63,7 +65,21 @@ if [ ! -z "$character" ]; then
       elif [[ $character == 2 ]]; then
          ################################# Install SSL ############################################
          echo +++++++++++++++++++++++++++++++++++++++++++++
+         echo ++++++++++++++++++++++++++++++++++++++++++++
+         echo +++++++++++++ Installing Vue.js Server +++++++++++++++
          echo +++++++++++++++++++++++++++++++++++++++++++++
+         echo +++++++++++++++++++++++++++++++++++++++++++++
+
+         sudo apt-get update -y
+         sudo apt-get remove docker docker-engine docker.io containerd runc -y
+         sudo apt-get install apt-transport-https ca-certificates  curl  gnupg  lsb-release -y
+         curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+         sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+
+      elif [[ $character == 3 ]]; then
+         ################################# Install SSL ############################################
+         echo +++++++++++++++++++++++++++++++++++++++++++++
+         echo ++++++++++++++++++++++++++++++++++++++++++++
          echo +++++++++++++ Installing SSL +++++++++++++++
          echo +++++++++++++++++++++++++++++++++++++++++++++
          echo +++++++++++++++++++++++++++++++++++++++++++++
@@ -75,7 +91,7 @@ if [ ! -z "$character" ]; then
          sudo ufw delete allow 'Apache'
          sudo certbot --apache
 
-      elif [[ $character == 3 ]]; then
+      elif [[ $character == 4 ]]; then
          ################################# Add Laravel to apache config ############################################
          echo +++++++++++++++++++++++++++++++++++++++++++++
          echo +++++++++++++++++++++++++++++++++++++++++++++
@@ -105,7 +121,7 @@ if [ ! -z "$character" ]; then
          sudo service apache2 restart
          fi
          
-      elif [[ $character == 4 ]]; then
+      elif [[ $character == 5 ]]; then
        ################################# Create laravel Privileges ############################################
          echo +++++++++++++++++++++++++++++++++++++++++++++
          echo +++++++++++++++++++++++++++++++++++++++++++++
@@ -123,7 +139,7 @@ if [ ! -z "$character" ]; then
          sudo chmod -R ug+rwx storage bootstrap/cache
          sudo chgrp -R www-data public/
          sudo chmod -R ug+rwx storage public
-      elif [[ $character == 5 ]]; then
+      elif [[ $character == 6 ]]; then
        ################################# Create ssh keys for github ############################################
          echo +++++++++++++++++++++++++++++++++++++++++++++
          echo +++++++++++++++++++++++++++++++++++++++++++++
